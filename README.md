@@ -9,6 +9,7 @@
 * [遍历数组几种循环的区别 map、filter....](Loop.md)
 * [捕获和冒泡](CaptureAndBubble.md)
 * [事件循环](EventLoop.md)
+* [vue新发现](vue.md)
 
 
 *  ps: 以上多多少少的抄袭了一点其他大神的博客，自己加了一点理解，如果有大神介意抄袭您的，请告知 dengwenwen95@163.com, 我会加以删除。
