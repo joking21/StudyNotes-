@@ -149,6 +149,48 @@
         return arr;
     }
 ```
+# 希尔排序
+
+## 原理
+
+希尔排序是按一定的间隔对数列进行分组，然后在每一个分组中做插入排序；随后逐次缩小间隔，在每一个分组中做插入排序...直到间隔等于1，做一次插入排序后结束。通常我们去取初始间隔为数列长度的一半：gap = length/2，以 gap = gap/2 的方式缩小;
+
+## 图解
+
+* (1) 首先取间隔为 gap = length/2 = 4，将数组分为如下的4组，对每一组实施插入排序：
+<div align=center>
+  <img src="img/sort/xier/x1.png" />
+</div>
+
+* (2) 接着继续分组，gap = gap/2 = 2，对每一组实施插入排序：
+<div align=center>
+  <img src="img/sort/xier/x2.png" />
+</div>
+
+* (3) 继续对数组分组，gap = gap/2 = 1，即所有元素组成一组，做插入排序完成算法：
+<div align=center>
+  <img src="img/sort/xier/x3.png" />
+</div>
+
+## 代码实现
+
+```javascript
+function sort(arr) {
+    for (let gap = Math.floor(arr.length / 2); gap > 0; gap = Math.floor(gap / 2)) {
+        // 内层循环与插入排序的写法基本上一直，每次移动的步长变成了gap
+        for (let i = gap; i < arr.length; i++) {
+            let temp = arr[i];
+            let j = i;
+            while (j > 0 && arr[j - gap]> temp) {
+                arr[j] = arr[j - gap];
+                j = j - gap;
+            }
+            arr[j] = temp;
+        }
+    }
+    return arr;
+}
+```
 
 # 归并排序
 
@@ -246,3 +288,4 @@
       return sort(left).concat([pivot], sort(right));
     }
 ```
+
