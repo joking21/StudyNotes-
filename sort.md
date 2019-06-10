@@ -151,6 +151,95 @@
 
 ## 原理
 
-其思想是将原始数组切分成较小的数组，直到每个小数组只有一个位置，接着将小数组归并成较大的数组，直到最后只有一个排序完毕的大数组。
+其思想是将原始数组切分成较小的数组，直到每个小数组只有一个位置，接着将小数组归并成较大的数组，直到最后只有一个排序完毕的大数组。(分治)
 
 ## 图解
+
+<div align=center>
+  <img src="img/sort/gb.png" />
+</div>
+
+## 代码实现
+
+```javascript
+      const merge = function (left, right) {
+        const result = [];
+        let il = 0;
+        let ir = 0;
+        while (il < left.length && ir < right.length) {
+          if (left[il] < right[ir]) {
+            result.push(left[il]);
+            il++;
+          } else {
+            result.push(right[ir]);
+            ir++;
+          }
+        }
+        while (il < left.length) {
+          result.push(left[il]);
+          il++;
+        }
+        while (ir < right.length) {
+          result.push(right[ir]);
+          ir++;
+        }
+        return result;
+      };
+      const merageSort = function (arr) {
+        const length = arr.length;
+        if (length === 1) return arr;
+        const mid = Math.floor(length / 2); // Math.floor向下取整
+        const left = arr.slice(0, mid);
+        const right = arr.slice(mid, length);
+        return merge(merageSort(left), merageSort(right));
+      };
+```
+
+# 快速排序
+
+## 原理
+* （1）在数据集之中，选择一个元素作为"基准"（pivot）。
+
+* （2）所有小于"基准"的元素，都移到"基准"的左边；所有大于"基准"的元素，都移到"基准"的右边。
+
+* （3）对"基准"左边和右边的两个子集，不断重复第一步和第二步，直到所有子集只剩下一个元素为止。
+
+## 图解
+
+* (1) 以35为基数，按照顺序，将每个元素与"基准"进行比较，形成两个子集；大于的在右边，小于的在左边
+
+<div align=center>
+  <img src="img/sort/kuaisu/k1.png" />
+</div>
+
+* (2) 左边的以14为基数，右边的以96为基数，重复步骤1
+
+<div align=center>
+  <img src="img/sort/kuaisu/k2.png" />
+</div>
+
+* (3) 重复步骤1，直到所有子集只剩下一个元素为止
+
+<div align=center>
+  <img src="img/sort/kuaisu/k3.png" />
+</div>
+
+## 代码实现
+
+```javascript
+    function sort(arr) {
+      if (arr.length <= 1) return arr;
+      const pivotIndex = Math.floor(arr.length / 2);
+      const pivot = arr.splice(pivotIndex, 1)[0];
+      const left = [];
+      const right = [];
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i] < pivot) {
+          left.push(arr[i]);
+        } else {
+          right.push(arr[i]);
+        }
+      }
+      return sort(left).concat([pivot], sort(right));
+    }
+```
