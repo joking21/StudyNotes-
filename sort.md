@@ -347,5 +347,68 @@ function sort(arr){
 }
 ```
  
+ # 计数排序
+
+ ## 原理
+
+计数排序的基本思想是对于给定的输入序列中的每一个元素x，确定该序列中值小于x的元素的个数。一旦有了这个信息，就可以将x直接存放到最终的输出序列的正确位置上。
+
+例如，如果输入序列中只有17个元素的值小于x的值，则x可以直接存放在输出序列的第18个位置上。当然，如果有多个元素具有相同的值时，我们不能将这些元素放在输出序列的同一个位置上。解决方案就是要反向填充目标数组，以及将每个数字的统计减去1。
+
+## 图解
+
+* 找到最大的元素
+
+* 用来存值的数组，下标在0到最大值范围，且把这个数组先填充0
+
+* 取值，存值的数组中，不为0的元素，取其下标，有几个，就输出几次下标
+
+<div align=center>
+  <img src="img/sort/jishu.png" />
+</div>
+
+## 代码实现
+
+```javascript
+function sort(arr) {
+    //先找出最大值
+    let maxValue = 0;
+    for (let i = 0; i < arr.length; i++) {
+        maxValue < arr[i] ? maxValue = arr[i] : null;
+    }
+    //建造一个下标为0-maxValue的顺序数组；此数组的长度是maxValue+1
+    let maxLength = maxValue + 1;
+    let temp = [];
+    let zArr = [];
+    // 创建一个长度为maxLength的数组，元素为0
+    for (let i = 0; i < maxLength; i++) {
+        temp[i] = 0;
+    }
+    // temp数组填充
+    for (let i = 0; i < arr.length; i++) {
+        temp[arr[i]]++;
+    }
+    // 取值
+    for(let i = 0; i < maxLength; i++){
+        while(temp[i]!=0){
+            zArr.push(i);
+            temp[i]--;
+        }
+    }
+    return zArr;
+}
+```
+
+# 桶排序
+
+## 原理
+
+桶排序是计数排序的升级版。它利用了函数的映射关系，高效与否的关键就在于这个映射函数的确定。桶排序 (Bucket sort)的工作的原理：假设输入数据服从均匀分布，将数据分到有限数量的桶里，每个桶再分别排序（有可能再使用别的排序算法或是以递归方式继续使用桶排序进行排）。
+
+## 图解
+<div align=center>
+  <img src="img/sort/tong.png" />
+</div>
 
 
+#基数排序
