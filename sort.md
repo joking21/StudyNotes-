@@ -289,3 +289,63 @@ function sort(arr) {
     }
 ```
 
+# 堆排序
+
+## 原理
+
+* (1) 将无需序列构建成一个堆，根据升序降序需求选择大顶堆或小顶堆;
+
+* (2) 将堆顶元素与末尾元素交换，将最大元素"沉"到数组末端;
+
+* (3) 重新调整结构，使其满足堆定义，然后继续交换堆顶元素与当前末尾元素，反复执行调整+交换步骤，直到整个序列有序。
+
+## 图解
+
+* 原文动画出自：https://www.ee.ryerson.ca/~courses/coe428/sorting/heapsort.html
+  <div align=center>
+  <img src="https://user-gold-cdn.xitu.io/2016/11/29/d1ac550a097055f65ed10a50d408f40d?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+  </div>
+
+## 代码实现
+
+```javascript
+let len;
+function buildHeap(arr) {
+    len = arr.length;
+    for (let i = Math.floor(len / 2) - 1; i >= 0; i--) { // 建堆  叶的左节点为2i+1,右节点为2i+2
+        adjustment(arr, i)
+    }
+}
+function adjustment(arr, i) {
+    let largeIndex = i;
+    let left = 2 * i + 1;
+    let right = 2 * i + 2;
+    if (left < len && arr[left] > arr[largeIndex]) {
+        largeIndex = left;
+    }
+    if (right < len && arr[right] > arr[largeIndex]) {
+        largeIndex = right;
+    }
+    if (largeIndex !== i) {  // 即有一个叶子节点大于叶节点
+        swap(largeIndex, i , arr);
+        adjustment(arr, largeIndex);
+    }
+}
+function swap (i, j, arr){
+    let temp = arr[j];
+    arr[j] = arr[i];
+    arr[i] = temp;
+}
+function sort(arr){
+    buildHeap(arr);
+    for(let i = arr.length - 1; i > 0; i--){
+        swap(0, i, arr);
+        len --;
+        adjustment(arr, 0);
+    }
+    return arr;
+}
+```
+ 
+
+
