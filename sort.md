@@ -463,3 +463,54 @@ function inSort(arr) {
 }
 ```
 #基数排序
+
+## 原理
+
+基数排序是一种非比较型整数排序算法，其原理是将整数按位数切割成不同的数字，然后按每个位数分别比较。由于整数也可以表达字符串（比如名字或日期）和特定格式的浮点数，所以基数排序也不是只能使用于整数。
+
+## 图解
+
+<div align=center>
+  <img src="img/sort/JJshu.png" />
+</div>
+
+## 代码实现
+
+```javascript
+function sort(arr) {
+    // 创建10个桶，每个桶为一个数组，下标0-9
+    let bucket = new Array(10);
+    // 查找数组的最大值，获取最大值的位数，以便于知道需要遍历几次
+    let maxValue = arr[0];
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i] > maxValue) {
+            maxValue = arr[i];
+        }
+    }
+    // 求数的位数
+    let size = maxValue.toString().length;
+    let mod = 10;
+    let dev = 1;
+    // let pos = 0;
+    for (let i = 0; i < size; i++ , dev *= 10, mod *= 10) {
+        for (let j = 0; j < arr.length; j++) {
+            let index = parseInt((arr[j] % mod) / dev);
+            if (bucket[index] === undefined) {
+                bucket[index] = [];
+            }
+            bucket[index].push(arr[j]);
+        }
+        let pos = 0;
+        for (let j = 0; j < bucket.length; j++) {
+            if (bucket[j] !== undefined) {
+                let value = undefined;
+                while((value = bucket[j].shift())!==undefined){
+                    arr[pos++] = value;
+                }
+            }
+
+        }
+    }
+    return arr;
+}
+```
