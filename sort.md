@@ -413,5 +413,53 @@ function sort(arr) {
   <img src="img/sort/tong.png" />
 </div>
 
+## 代码实现
 
+```javascript
+function sort(arr, bucketSize = 5) {
+    let zArr = [];
+    let maxValue = arr[0];
+    let minValue = arr[0];
+    // 计算最大值与最小值
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] < minValue) {
+            minValue = arr[i];
+        } else if (arr[i] > maxValue) {
+            maxValue = arr[i];
+        }
+    }
+
+    // 计算每个桶的分配个数
+    const region = Math.floor((maxValue - minValue) / bucketSize) + 1;
+    // const buckets = new Array(bucketSize).fill(JSON.parse(JSON.stringify([])));
+    const buckets = new Array(bucketSize);
+    for (let i = 0; i < buckets.length; i++) {
+        buckets[i] = []
+    }
+    // 分配桶
+    for (let i = 0; i < arr.length; i++) {
+        buckets[Math.floor((arr[i] - minValue) / region)].push(arr[i]);
+    }
+    // 桶内插入排序
+    for (let i = 0; i < buckets.length; i++) {
+        inSort(buckets[i]);
+        for (let j = 0; j < buckets[i].length; j++) {
+            zArr.push(buckets[i][j]);
+        }
+    }
+    return zArr;
+}
+function inSort(arr) {
+    for (let i = 1; i < arr.length; i++) {
+        let temp = arr[i];
+        let j = i;
+        while (j > 0 && arr[j - 1] > temp) {
+            arr[j] = arr[j - 1];
+            j--;
+        }
+        arr[j] = temp;
+    }
+    return arr;
+}
+```
 #基数排序
