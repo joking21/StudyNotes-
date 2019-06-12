@@ -9,9 +9,10 @@ function sort(arr) {
     let temp = [];
     let zArr = [];
     // 创建一个长度为maxLength的数组，元素为0
-    for (let i = 0; i < maxLength; i++) {
-        temp[i] = 0;
-    }
+    // for (let i = 0; i < maxLength; i++) {
+    //     temp[i] = 0;
+    // }
+    temp = new Array(maxLength).fill(0);
     // temp数组填充
     for (let i = 0; i < arr.length; i++) {
         temp[arr[i]]++;
@@ -26,3 +27,4 @@ function sort(arr) {
     return zArr;
 }
 sort([1,8,9,5,7,2,9,8])
+

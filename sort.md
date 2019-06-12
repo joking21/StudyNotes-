@@ -351,6 +351,8 @@ function sort(arr){
 
  ## 原理
 
+* 未考虑负数
+
 计数排序的基本思想是对于给定的输入序列中的每一个元素x，确定该序列中值小于x的元素的个数。一旦有了这个信息，就可以将x直接存放到最终的输出序列的正确位置上。
 
 例如，如果输入序列中只有17个元素的值小于x的值，则x可以直接存放在输出序列的第18个位置上。当然，如果有多个元素具有相同的值时，我们不能将这些元素放在输出序列的同一个位置上。解决方案就是要反向填充目标数组，以及将每个数字的统计减去1。
@@ -381,9 +383,10 @@ function sort(arr) {
     let temp = [];
     let zArr = [];
     // 创建一个长度为maxLength的数组，元素为0
-    for (let i = 0; i < maxLength; i++) {
-        temp[i] = 0;
-    }
+    // for (let i = 0; i < maxLength; i++) {
+    //     temp[i] = 0;
+    // }
+    temp = new Array(maxLength).fill(0);
     // temp数组填充
     for (let i = 0; i < arr.length; i++) {
         temp[arr[i]]++;
