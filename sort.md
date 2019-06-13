@@ -1,3 +1,14 @@
+# 常规排序sort
+
+## 使用sort关键字
+
+```javascript
+function sortNumber(a,b){
+ return a - b
+}
+arr.sort(sortNumber)
+```
+
 # 冒泡排序
 
 ## 原理
