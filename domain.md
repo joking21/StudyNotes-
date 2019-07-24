@@ -7,6 +7,9 @@
 ## 方式
 
 * JSONP跨域
+
+主要是通过script标签
+
 * iframe跨域
 * window.name 跨域
 * document.domain 跨域
