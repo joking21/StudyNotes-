@@ -1,3 +1,6 @@
+
+## react源码解析  https://react.jokcy.me/
+
 ## react中key的作用是什么？
 
 Key是React用于追踪哪些列表中元素被修改，被添加或者被移除的辅助标识。
@@ -52,3 +55,76 @@ Refs是React提供给我们的安全访问DOM元素或者某个组件实例的�
 </ul>
 ```
 refs并不是类组件的专属，函数式组件同样能够利用闭包暂存其值。
+
+## 展示组件（Presentational component）和容器组件(Container component)之间有何不同
+
+* 展示组件关心组件看起来是什么。展示专门通过props接受数据和回调，并且几乎不会有自身的状态，但当展示组件拥有自身的状态时，通常也只关心UI状态，而不是数据的状态。
+* 容器组件则更关心组件是如何运作的。容器组件会为展示组件或者其它容器组件提供数据和行为,他们会调用Flux actions,并将其作为回调提供给展示组件。容器组件经常是有状态的，因为它们是（其它组件的）数据源。
+
+## 类组件（Class component）和函数式组件(Functional component)之间有何不同
+
+* 类组件不仅允许你使用更多额外得功能，如组件自身得状态和生命周期钩子，也能使组件直接访问store并维持状态
+* 当组件仅是接收props，并将组件自身渲染到页面时，该组件就是一个‘无状态组件（stateless component）’,可以使用一个纯函数来创建这样的组件。这种组件也被称为哑组件（dumb components）或展示组件
+
+## 组件的状态(state)和属性(props)之间有何不同
+
+* State是一种数据结构，用于组件挂载时所需数据的默认值。State可能会随着时间的推移而发生突变，但多数时候是作为用户事件行为的结果。
+* Props则是组件的配置。props由父组件传递给子组件，并且就子组件而言，props是不可变的(immutable)。组件不能改变自身的props，但是可以把其子组件的props放在一起（统一管理）。props也不仅仅是数据--回调数据也可以通过props传递。
+
+## state为什么是异步的
+
+* 保证内部的一致性（因为props是要等到父组件渲染过后才能拿到，也就是不能同步更新，state出于统一性设成异步更新）
+* 性能优化（举例说你正在一个聊天窗口输入，如果来了一条新消息又要render，那就会阻塞你的当前操作，导致延迟什么的）。
+* 支持state在幕后渲染（异步可以使state在幕后更新，而不影响你当前旧的页面的交互，提升用户体验）
+
+## 受控组件（controlled component）
+
+在html种，类似``<input>, <textarea>和<select>`` 这样的表单元素会维护自身的状态，并基于用户的输入来更新。当用户提交表单时，前面提到的元素的值将随表单一起被发送，但在React中会有些不同，包含表单元素的组件将会在state中追踪输入的值，并且每次调用回调函数时，如onChange会更新state,重新渲染组件。一个输入表单元素，它的值通过React的这种方式来控制，这样的元素就被称为"受控元素"。
+
+## 高阶组件(higher order component)
+
+高阶组件是一个以组件为参数并返回一个新组件的函数。HOC运行你重用代码，逻辑和引导抽象。最常用的可能是Redux的connect函数。除了简单分享工具库和简单的组合，HOC最好的方式是共享React组件之间的行为。如果你发现你在不同的地方写了大量代码来做同一件事时，就应该考虑将代码重构为可重用的HOC.
+
+## 为什么建议传递给setState的参数是一个callback而不是一个对象
+
+因为this.props和this.state的更新可能是异步的，不能依赖它们的值去计算下一个state。
+
+## （在构造函数中）调用super(props)的目的是什么
+
+在super()被调用之前，子类是不能使用this的，在ES2015中，子类必须在constructor中调用super()。传递props给super()的原因是便于(在子类中)能在constructor访问this.props。
+
+## 应该在React组件的何处发起Ajax请求
+
+在React组件中，应该在componentDidMount中发起网络请求。这个方法会在组件第一次“挂载”(被添加到DOM)时执行，在组件的生命周期中仅会执行一次。更重要的是，你不能保证在组件挂载之前Ajax请求已经完成，如果是这样，也就意味着你将尝试在一个未挂载的组件上调用setState，这将不起作用。在componentDidMount中发起网络请求将保证这有一个组件可以更新了。
+
+## createElement和cloneElement有什么区别？
+
+* React.createElement(): JSX语法就是用React.createElement()来构建React元素的。它接受三个参数，第一个参数可以是一个标签名。如div,span,或者React组件。第二个参数为传入的属性。第三个以及之后的参数，皆作为组件的子组件。
+```javascript
+React.createElement(
+    type,
+    [props],
+    [...children]
+)
+```
+* React.cloneElement()与React.createElement()相似，不同的是它传入的第一个参数是一个React元素，而不是标签名或组件。新添加的属性会并入原有的属性，传入到返回的新元素中，而旧的子元素将被替换。
+```javascript
+React.cloneElement(
+    element,
+    [props],
+    [...children]
+)
+```
+## React中有三种构建组件的方式
+
+React.createClass(), ES6 class和无状态函数
+
+## React组件的划分 业务组件+技术组件
+
+* 根据组件的职责通常把组件分为UI组件和容器组件。
+* UI组件负责UI的呈现，容器组件负责管理数据和逻辑。
+* 两者通过两者通过React-Redux提供connect方法联系起来。
+
+## redux
+
+* redux是一个应用数据流框架，主要是解决了组件间状态共享的问题，原理是集中式管理，主要有三个核心方法，action,store,reducer,工作流程是view调用store的dispatch接收action传入store，reducer进行state操作，view通过store提供的getState获取最新的数据
