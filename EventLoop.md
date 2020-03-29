@@ -116,3 +116,32 @@ process.nextTick(function foo() {
 事实上，现在要是你写出递归的process.nextTick，Node.js会抛出一个警告，要求你改成setImmediate。
 
 另外，由于process.nextTick指定的回调函数是在本次"事件循环"触发，而setImmediate指定的是在下次"事件循环"触发，所以很显然，前者总是比后者发生得早，而且执行效率也高（因为不用检查"任务队列"）
+
+## 微任务和宏任务
+ * 宏任务： 包括整体代码script，setTimeOut，setInterval
+ * 微任务： Promise与process.nextTick
+
+ 事件循环的顺序，决定js代码的执行顺序。进入整体代码（宏任务）后，开始第一次循环。接着执行所有的微任务。然后再次从宏任务开始，找到其中一个任务队列执行完毕，再执行所有的微任务。
+ ```javascript
+setTimeout(function() {
+  console.log('6');
+})
+setTimeout(function() {
+  console.log('7');
+})
+new Promise(function(resolve) {
+  resolve()
+  console.log('1');  
+}).then(function() {
+  console.log('3');
+}).then(function() {
+  console.log('4');
+}).then(function(){
+  console.log('5')
+  setTimeout(function() {
+    console.log('8');
+  })
+})
+console.log('2');
+//上面代码的执行顺序是 1，2，3，4，5，6，7，8
+ ```
