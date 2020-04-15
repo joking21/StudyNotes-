@@ -21,6 +21,22 @@
   <img src="img/loop/reduce.png" />
 </div>
 
+```javascript
+array.reduce(function(total, currentValue, currentIndex, arr), initialValue) 
+// function 必需。用于执行每个数组元素的函数。函数参数:[total->必需。初始值, 或者计算结束后的返回值。currentValue->	必需。当前元素。 currentIndex-> 可选。当前元素的索引, arr->可选。当前元素所属的数组对象。]
+```
+数组扁平化
+```javascript
+var arr = [[1,2,2],[3,4,5,5],[6,7,8,9,[11,12,[12,13,[14]]]],10];
+var flatten = function(arr){
+    return arr.reduce(
+        function(acc, val){
+            return acc.concat(Array.isArray(val) ? flatten(val) : val)
+        }, []
+    );
+};
+var arr1 = flatten(arr);
+```
 - filter
 
 filter()过滤，返回满足条件的元素，不改变原数组,有三个参数，同forEach。
