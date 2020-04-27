@@ -8,7 +8,9 @@
 * [跨域](domain.md)
 * [通信](communication.md)
 * [http,https](http.md)
+* [浏览器缓存](cache.md)
 * [垃圾回收机制](Garbage.md)
 * [react](react.md)
+* [模块化-import和require的区别](modelues.md)
 * [css](css.md)
 *  ps: dengwenwen95@163.com
