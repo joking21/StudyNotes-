@@ -13,4 +13,5 @@
 * [react](react.md)
 * [模块化-import和require的区别](modelues.md)
 * [css](css.md)
+* [柯里化](currying.md)
 *  ps: dengwenwen95@163.com
