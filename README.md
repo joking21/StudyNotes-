@@ -15,7 +15,7 @@
 * [css](css.md)
 * [柯里化](currying.md)
 ### 以下为面试题
-* [ccss总结](MS.md)
+* [css总结](MS.md)
 * [Html5](html.md)
 * [JS](javascript.md)
 * [网络相关](web.md)
