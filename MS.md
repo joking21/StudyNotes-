@@ -186,4 +186,31 @@ http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html
     }
 ```
 
+# z-index
+https://www.zhangxinxu.com/wordpress/2016/01/understand-css-stacking-context-order-z-index/
 
+## z-index对定位元素有效
+- 即当前元素的position为 absolute | relative | fixed . inherit取决于父元素，如果父元素没有设置定位则z-index无效。static无效
+## 一个层叠上下文的元素排列顺序
+层叠上下文（background/border）-> 负z-index -> block块状水平盒子 -> float浮动盒子 -> inline/inline-block水平盒子 -> z-index:auto｜0 ->正z-index
+
+- 层叠上下文的层叠水平要比普通元素高
+- 层叠上下文可以阻断元素的混合模式
+- 层叠上下文和兄弟元素独立，也就是当进行层叠变化或渲染的时候，只需要考虑后台元素
+- 每个层叠上下文和兄弟元素独立，也就是当进行层叠变化或渲染的时候，只需要考虑后代元素
+- 每个层叠上下文是自成体系的，当元素发生层叠的时候，整个元素被认为是在父层叠上下文的层叠顺序中
+
+## 层叠上下文的创建
+
+- 页面根元素天生具有层叠上下文，称之为“根层叠上下文”
+- z-index值为数值的定位元素的传统层叠上下文
+    * z-index不为auto的定位元素  absolute relative fixed
+- 某些css3属性
+    * z-index不为auto的flex项，其是层叠上下文，父元素不是（父元素设置：display: flex | inline-flex）
+    * 元素opacity值不是1
+    * 元素的transform值不是none
+    * 元素的mix-blend-mode值不是normal
+    * 元素的filter值不是none 
+    * 元素的isolation值不是isolate
+    * will-change指定的属性值为上面任意一个
+    * 元素的 -webkit-overflow-scrolling设为touch
