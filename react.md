@@ -33,7 +33,7 @@ Key是React用于追踪哪些列表中元素被修改，被添加或者被移除
 1. constructor
 2. getDerivedStateFromProps(nextProps, prevState)
 3. render
-4. componentDidUpdate
+4. componentDidMount
 * 更新阶段
 1. getDerivedStateFromProps(nextProps,prevState)
 2. shouldComponentUpdate
