@@ -28,6 +28,21 @@ Key是React用于追踪哪些列表中元素被修改，被添加或者被移除
 
 1. componentWillUnmount：组件即将销毁
 
+## 16.3之后的生命周期
+* 挂载阶段
+1. constructor
+2. getDerivedStateFromProps(nextProps, prevState)
+3. render
+4. componentDidUpdate
+* 更新阶段
+1. getDerivedStateFromProps(nextProps,prevState)
+2. shouldComponentUpdate
+3. render
+4. getSnapShotBeforeUpdate(prevProps, prevState) (可以返回一个值，用于componentDidUpdate的第三个参数。该生命周期通常与componentDidUpdate一起使用)
+5. componentDidUpdate(prevProps, prevState, snapShot)
+* 卸载阶段
+1. componentWillUnmount
+
 ## shouldComponentUpdate 是做什么得，（react性能优化是哪个周期函数）
 
 shouldComponentUpdate判断是否需要调用render方法重新描绘dom。因为dom得描绘非常消耗性能，如果我们能在shouldComponentUpdate方法中能够写出更优化的dom diff算法，可以极大的提高性能。
