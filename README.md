@@ -17,7 +17,7 @@
 * [Promises实现](Promise.md)
 * [MVVM实现](MVVM/)
 ### 集合篇幅
-* [css总结](Css.md)
+* [css总结](css.md)
 * [Html5](html.md)
 * [JS](javascript.md)
 * [网络相关](web.md)
