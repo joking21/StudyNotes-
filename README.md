@@ -18,6 +18,7 @@
 * [MVVM实现](MVVM/)
 * [实现一个event](event.md)
 * [原型链+继承](proto.md)
+* [this显示绑定](bindShow.md)
 ### 集合篇幅
 * [css总结](css.md)
 * [Html5](html.md)

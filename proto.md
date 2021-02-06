@@ -55,7 +55,7 @@ function Sub(){
   this.age = 1;
 }
 Sub.prototype = Object.prototype(Sup.prototype);
-Sub.Constructor = Sub;
+Sub.prototype.Constructor = Sub;
 Sub.prototype.getAge = function(){
   console.log(this.age)
 }
