@@ -1,0 +1,52 @@
+<!--
+ * @Author: dengWW
+ * @Date: 2021-01-29 17:17:56
+ * @LastEditors: dengWW
+ * @LastEditTime: 2021-02-01 10:36:16
+ * @Description: 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <p>{{counter}}</p>
+    <p k-text="counter"></p>
+    <p k-html="desc"></p>
+    <div>{{counter}}</div>
+  </div>
+  <!-- 
+    涉及类型介绍
+    KVue: 框架构造函数
+    Observer: 执行数据响应化（分辨数据是对象还是数组）
+    Compile: 编译模版，初始化视图，收集依赖（更新函数，watcher创建）
+    Watcher:执行更新函数（更新dom）
+    Dep：管理多个Watcher,批量更新
+  -->
+  <script src="./kvue.js"></script>
+  <script src="./compile.js"></script>
+  <script>
+    function update(){
+      p.innerHtml = counter;
+    }
+    const app = new KVue({
+      el: '#app',
+      data: {
+        counter: 1,
+        desc:'<span style="color: red">iiiiii</span>'
+      }
+    })
+    // setInterval(()=>{
+    //   app.counter++;
+    // }, 1000)
+  </script>
+</body>
+
+</html>
