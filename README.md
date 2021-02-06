@@ -13,7 +13,7 @@
 * [react](react.md)
 * [模块化-import和require的区别](modelues.md)
 * [柯里化](currying.md)
-* [拷贝] (clone.md)
+* [拷贝](clone.md)
 ### 集合篇幅
 * [css总结](Css.md)
 * [Html5](html.md)
