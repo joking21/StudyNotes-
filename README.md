@@ -12,10 +12,10 @@
 * [垃圾回收机制](Garbage.md)
 * [react](react.md)
 * [模块化-import和require的区别](modelues.md)
-* [css](css.md)
 * [柯里化](currying.md)
-### 以下为面试题
-* [css总结](MS.md)
+* [拷贝] (clone.md)
+### 集合篇幅
+* [css总结](Css.md)
 * [Html5](html.md)
 * [JS](javascript.md)
 * [网络相关](web.md)
