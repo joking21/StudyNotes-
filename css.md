@@ -82,10 +82,6 @@
   margin-left:-50%;
   ```
   ```css
-  position:absolute;
-  transform:translate(-50%,0);
-  ```
-  ```css
   display:flex; 
   justify-content: center;
   ```
