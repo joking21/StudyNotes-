@@ -39,6 +39,15 @@ function dNew(){
   return typeof ret === 'object' ? ret : obj;
 }
 ```
+
+# 实现Object.create
+```javascript
+function f(o){
+  function F(){};
+  F.prototype = o;
+  return new F();
+}
+```
 # 寄生组合继承
 ```javascript
 // 寄生组合继承
@@ -54,7 +63,7 @@ function Sub(){
   this.name = 'sub';
   this.age = 1;
 }
-Sub.prototype = Object.prototype(Sup.prototype);
+Sub.prototype = Object.create(Sup.prototype);
 Sub.prototype.Constructor = Sub;
 Sub.prototype.getAge = function(){
   console.log(this.age)
